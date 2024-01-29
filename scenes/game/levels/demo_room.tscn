@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://d06c53vvvqj6w"]
+
+[ext_resource type="Texture2D" uid="uid://dkpt3wlx28axn" path="res://assets/textures/texture_01.png" id="1_e8y00"]
+[ext_resource type="PackedScene" uid="uid://dqr75vt5q08wb" path="res://scenes/game/characters/player.tscn" id="2_upcxu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlbnf"]
+albedo_texture = ExtResource("1_e8y00")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_gly1l"]
+material = SubResource("StandardMaterial3D_nlbnf")
+size = Vector3(20, 1, 20)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t2lpo"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_myd6f"]
+sky_material = SubResource("ProceduralSkyMaterial_t2lpo")
+
+[sub_resource type="Environment" id="Environment_jwvmi"]
+background_mode = 2
+sky = SubResource("Sky_myd6f")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="DemoRoom" type="Node3D"]
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGMesh3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_gly1l")
+
+[node name="Env" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_jwvmi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_upcxu")]

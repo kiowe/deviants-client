@@ -1,15 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://d06c53vvvqj6w"]
+[gd_scene load_steps=11 format=3 uid="uid://d06c53vvvqj6w"]
 
 [ext_resource type="Texture2D" uid="uid://dkpt3wlx28axn" path="res://assets/textures/texture_01.png" id="1_e8y00"]
+[ext_resource type="Texture2D" uid="uid://cnaw3ekchx0px" path="res://assets/textures/texture_02.png" id="2_lkmfr"]
 [ext_resource type="PackedScene" uid="uid://dqr75vt5q08wb" path="res://scenes/game/characters/player.tscn" id="2_upcxu"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlbnf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbvk3"]
 albedo_texture = ExtResource("1_e8y00")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_gly1l"]
-material = SubResource("StandardMaterial3D_nlbnf")
+material = SubResource("StandardMaterial3D_xbvk3")
 size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny0hw"]
+albedo_texture = ExtResource("2_lkmfr")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_tj5el"]
+material = SubResource("StandardMaterial3D_ny0hw")
+size = Vector3(5, 1, 10)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t2lpo"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,6 +42,26 @@ glow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 mesh = SubResource("BoxMesh_gly1l")
+
+[node name="Cube2" type="CSGMesh3D" parent="Stage"]
+transform = Transform3D(0.401063, 0, 0, 0, 4, 0, 0, 0, 0.0393003, -5.0421, 2.01579, -2.00511)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube3" type="CSGMesh3D" parent="Stage"]
+transform = Transform3D(0.401063, 0, 0, 0, 0.4, 0, 0, 0, 0.496756, -3.03437, 1.19143, -0.00510931)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube4" type="CSGMesh3D" parent="Stage"]
+transform = Transform3D(0.401063, 0, 0, 0, 0.34641, 0.248378, 0, -0.2, 0.430203, -3.034, -0.024, -4.54)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube5" type="CSGMesh3D" parent="Stage"]
+transform = Transform3D(0.401063, 0, 0, 0, -1.74846e-07, 0.0393003, 0, -4, -1.71787e-09, -5.0421, 1.78372, 0.99489)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
 
 [node name="Env" type="Node3D" parent="."]
 

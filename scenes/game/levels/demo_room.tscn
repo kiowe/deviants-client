@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dkpt3wlx28axn" path="res://assets/textures/texture_01.png" id="1_e8y00"]
 [ext_resource type="Texture2D" uid="uid://cnaw3ekchx0px" path="res://assets/textures/texture_02.png" id="2_lkmfr"]
-[ext_resource type="PackedScene" uid="uid://dqr75vt5q08wb" path="res://scenes/game/characters/player.tscn" id="2_upcxu"]
+[ext_resource type="PackedScene" uid="uid://drkxv4ame10tc" path="res://scenes/game/characters/player.tscn" id="2_upcxu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbvk3"]
 albedo_texture = ExtResource("1_e8y00")
@@ -10,7 +10,7 @@ uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_gly1l"]
 material = SubResource("StandardMaterial3D_xbvk3")
-size = Vector3(20, 1, 20)
+size = Vector3(50, 1, 50)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny0hw"]
 albedo_texture = ExtResource("2_lkmfr")
@@ -44,22 +44,32 @@ use_collision = true
 mesh = SubResource("BoxMesh_gly1l")
 
 [node name="Cube2" type="CSGMesh3D" parent="Stage"]
-transform = Transform3D(0.401063, 0, 0, 0, 4, 0, 0, 0, 0.0393003, -5.0421, 2.01579, -2.00511)
+transform = Transform3D(0.401063, 0, 0, 0, 4, 0, 0, 0, 0.0393003, -5.0421, 2.01579, -3.00511)
 use_collision = true
 mesh = SubResource("BoxMesh_tj5el")
 
 [node name="Cube3" type="CSGMesh3D" parent="Stage"]
-transform = Transform3D(0.401063, 0, 0, 0, 0.4, 0, 0, 0, 0.496756, -3.03437, 1.19143, -0.00510931)
+transform = Transform3D(0.401063, 0, 0, 0, 0.4, 0, 0, 0, 0.496756, -3.034, 1.12, -0.005)
 use_collision = true
 mesh = SubResource("BoxMesh_tj5el")
 
 [node name="Cube4" type="CSGMesh3D" parent="Stage"]
-transform = Transform3D(0.401063, 0, 0, 0, 0.34641, 0.248378, 0, -0.2, 0.430203, -3.034, -0.024, -4.54)
+transform = Transform3D(0.401063, 0, 0, 0, 0.34641, 0.248378, 0, -0.2, 0.430203, -3.034, -0.09, -4.54)
 use_collision = true
 mesh = SubResource("BoxMesh_tj5el")
 
 [node name="Cube5" type="CSGMesh3D" parent="Stage"]
-transform = Transform3D(0.401063, 0, 0, 0, -1.74846e-07, 0.0393003, 0, -4, -1.71787e-09, -5.0421, 1.78372, 0.99489)
+transform = Transform3D(0.401063, 0, 0, 0, -1.74846e-07, 0.0393003, 0, -4, -1.71787e-09, -5.5, 1.5, -0.005)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube6" type="CSGMesh3D" parent="Stage"]
+transform = Transform3D(0.401063, 0, 0, 0, -1.74846e-07, 0.0393003, 0, -4, -1.71787e-09, -8, 1.8, -0.005)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube7" type="CSGMesh3D" parent="Stage"]
+transform = Transform3D(0.401063, 0, 0, 0, -1.74846e-07, 0.0393003, 0, -4, -1.71787e-09, -10.5, 2, -0.005)
 use_collision = true
 mesh = SubResource("BoxMesh_tj5el")
 
@@ -73,3 +83,4 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_upcxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.840559, 0, 0)

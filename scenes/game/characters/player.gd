@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed = 4.0
+@export var speed = 4.3
 @export var crouch_speed = 2.0
 @export var accel = 16.0
 @export var jump_velocity = 6.0
@@ -10,16 +10,23 @@ extends CharacterBody3D
 @export var min_angle = -80
 @export var max_angle = 90
 
+@export var cam_rotation_amount = 0.15
+@export var weapon_sway_amount = 5.0
+@export var weapon_rotation_amount = 1.0
+
 @onready var head = $Head
 @onready var collision_shape = $CollisionShape3D
 @onready var top_cast = $TopCast
+@onready var weapon_holder = $Head/WeaponHolder
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var look_rot : Vector2
 var stand_height : float
+var def_weapon_holder_pos : Vector3
 
 func _ready():
 	stand_height = collision_shape.shape.height
+	def_weapon_holder_pos = weapon_holder.position
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
@@ -49,6 +56,7 @@ func _physics_process(delta):
 	
 	head.rotation_degrees.x = look_rot.x
 	rotation_degrees.y = look_rot.y
+	cam_tilt(input_dir.x, delta)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -62,3 +70,7 @@ func crouch(delta : float, reverse = false):
 	collision_shape.shape.height = lerp(collision_shape.shape.height, target_height, crouch_transition * delta)
 	collision_shape.position.y = lerp(collision_shape.position.y, target_height * 0.5, crouch_transition * delta)
 	head.position.y = lerp(head.position.y, target_height - 0.3, crouch_transition * delta)
+
+func cam_tilt(input_x, delta):
+	if head:
+		head.rotation.z = lerp(head.rotation.z, -input_x * cam_rotation_amount, 10 * delta)

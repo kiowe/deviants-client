@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://drkxv4ame10tc"]
+[gd_scene load_steps=12 format=3 uid="uid://drkxv4ame10tc"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player.gd" id="1_rovwi"]
 [ext_resource type="PackedScene" uid="uid://coen7unhdqr4" path="res://assets/models/arms_with_gun_pistol/arms_with_gun_pistol.tscn" id="2_r1urs"]
+[ext_resource type="PackedScene" uid="uid://21lpo8evtp1v" path="res://scripts/utilities/camera_shake/shakeable_camera.tscn" id="2_vt6on"]
 [ext_resource type="Script" path="res://scripts/recoil_handler.gd" id="3_uo8ud"]
+[ext_resource type="PackedScene" uid="uid://dthb6jx8uct03" path="res://scripts/utilities/trauma_causer/trauma_causer.tscn" id="5_f2c6o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ggj08"]
 height = 1.8
@@ -22,6 +24,8 @@ min_value = -1.0
 _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.05, 0.143), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_l2fs4"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_v4of0"]
 radius = 0.4
 
@@ -35,7 +39,7 @@ shape = SubResource("CapsuleShape3D_ggj08")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="shakeable_camera" parent="Head" instance=ExtResource("2_vt6on")]
 
 [node name="WeaponHolder" type="Node3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 0.984807, -0.173648, 0, 0.173648, 0.984807, -0.00291042, -0.0875831, -0.0423273)
@@ -48,6 +52,13 @@ recoil_rotation_z = SubResource("Curve_4tl6y")
 recoil_position_z = SubResource("Curve_5dj6v")
 recoil_amplitude = Vector3(1, 0.05, 0.215)
 lerp_speed = 10.0
+
+[node name="trauma_causer" parent="Head/WeaponHolder/arms_with_gun_pistol2" instance=ExtResource("5_f2c6o")]
+transform = Transform3D(1, 5.32907e-15, -2.13163e-14, -5.32907e-15, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
+trauma_amount = 0.8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/WeaponHolder/arms_with_gun_pistol2/trauma_causer"]
+shape = SubResource("SphereShape3D_l2fs4")
 
 [node name="TopCast" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

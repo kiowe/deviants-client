@@ -16,6 +16,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("fire"):
+		$trauma_causer.cause_trauma()
 		apply_recoil()
 	
 	if current_time < 1:

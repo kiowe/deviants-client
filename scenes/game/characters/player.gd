@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@export var speed = 3.6
-@export var crouch_speed = 1.7
+@export var speed = 4.3
+@export var crouch_speed = 2.5
 @export var accel = 16.0
 @export var jump_velocity = 6.0
 @export var crouch_height = 0.9

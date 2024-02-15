@@ -1,13 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://drkxv4ame10tc"]
+[gd_scene load_steps=9 format=3 uid="uid://drkxv4ame10tc"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player.gd" id="1_rovwi"]
-[ext_resource type="PackedScene" uid="uid://dvdmm0fr65w3k" path="res://assets/models/arms_with_gun_pistol/arms_with_gun_pistol.glb" id="2_bk1rs"]
+[ext_resource type="PackedScene" uid="uid://coen7unhdqr4" path="res://assets/models/arms_with_gun_pistol/arms_with_gun_pistol.tscn" id="2_r1urs"]
+[ext_resource type="Script" path="res://scripts/recoil_handler.gd" id="3_uo8ud"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ggj08"]
 height = 1.8
 
+[sub_resource type="Curve" id="Curve_bqd7c"]
+min_value = -1.0
+_data = [Vector2(0, 0.05), 0.0, 0.0, 0, 0, Vector2(0.05, 0.231), -1.4256, -1.4256, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_4tl6y"]
+min_value = -1.0
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.05, 0.15), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5dj6v"]
+min_value = -1.0
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.05, 0.143), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_v4of0"]
-radius = 0.45
+radius = 0.4
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_rovwi")
@@ -22,9 +38,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="WeaponHolder" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.984807, -0.173648, 0, 0.173648, 0.984807, -0.00291042, -0.0875831, -0.0423273)
 
-[node name="arms_with_gun_pistol" parent="Head/WeaponHolder" instance=ExtResource("2_bk1rs")]
-transform = Transform3D(-1, -9.13817e-09, 8.69439e-08, 0, 0.994522, 0.104528, -8.74228e-08, 0.104528, -0.994522, 0, 0, 0.09)
+[node name="arms_with_gun_pistol2" parent="Head/WeaponHolder" instance=ExtResource("2_r1urs")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("3_uo8ud")
+recoil_rotation_x = SubResource("Curve_bqd7c")
+recoil_rotation_z = SubResource("Curve_4tl6y")
+recoil_position_z = SubResource("Curve_5dj6v")
+recoil_amplitude = Vector3(1, 0.05, 0.215)
+lerp_speed = 10.0
 
 [node name="TopCast" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

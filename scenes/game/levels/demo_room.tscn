@@ -43,11 +43,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 mesh = SubResource("BoxMesh_gly1l")
 
-[node name="Cube2" type="CSGMesh3D" parent="Stage"]
-transform = Transform3D(0.401063, 0, 0, 0, 4, 0, 0, 0, 0.0393003, -5.0421, 2.01579, -3.00511)
-use_collision = true
-mesh = SubResource("BoxMesh_tj5el")
-
 [node name="Cube3" type="CSGMesh3D" parent="Stage"]
 transform = Transform3D(0.401063, 0, 0, 0, 0.4, 0, 0, 0, 0.496756, -3.034, 1.12, -0.005)
 use_collision = true
@@ -74,7 +69,30 @@ use_collision = true
 mesh = SubResource("BoxMesh_tj5el")
 
 [node name="Ramp2" type="CSGMesh3D" parent="Stage"]
-transform = Transform3D(0.401063, 0, 0, 0, 0.34641, 0.620945, 0, -0.2, 1.07551, -13.034, 2.88974, 0.621065)
+transform = Transform3D(0.401063, 0, 0, 0, 0.34641, 0.620945, 0, -0.2, 1.07551, -17.034, 2.88974, 0.621065)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Node3D" type="Node3D" parent="Stage"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -10.5725, 1.04759, -13.0424)
+
+[node name="Cube8" type="CSGMesh3D" parent="Stage/Node3D"]
+transform = Transform3D(2, 0, 0, 0, 4, 0, 0, 0, 0.05, 0.572464, 0.952415, 2.71127)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube9" type="CSGMesh3D" parent="Stage/Node3D"]
+transform = Transform3D(2, 0, 0, 0, 4, 0, 0, 0, 0.05, 0.572464, 0.952415, -2.62873)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube10" type="CSGMesh3D" parent="Stage/Node3D"]
+transform = Transform3D(-5.11423e-08, 0, -0.05, 0, 4, 0, 1.17, 0, -2.18557e-09, -4.64254, 0.952415, 0.0505514)
+use_collision = true
+mesh = SubResource("BoxMesh_tj5el")
+
+[node name="Cube11" type="CSGMesh3D" parent="Stage/Node3D"]
+transform = Transform3D(2.09724, 0, 0, 0, -2.56045e-07, -0.05, 0, 5.85763, -2.18557e-09, 0.332854, 3.19741, 0.0459714)
 use_collision = true
 mesh = SubResource("BoxMesh_tj5el")
 

@@ -1,30 +1,216 @@
-[gd_scene load_steps=12 format=3 uid="uid://drkxv4ame10tc"]
+[gd_scene load_steps=18 format=3 uid="uid://drkxv4ame10tc"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player.gd" id="1_rovwi"]
 [ext_resource type="PackedScene" uid="uid://coen7unhdqr4" path="res://assets/models/arms_with_gun_pistol/arms_with_gun_pistol.tscn" id="2_r1urs"]
 [ext_resource type="PackedScene" uid="uid://21lpo8evtp1v" path="res://scripts/utilities/camera_shake/shakeable_camera.tscn" id="2_vt6on"]
-[ext_resource type="Script" path="res://scripts/recoil_handler.gd" id="3_uo8ud"]
+[ext_resource type="PackedScene" uid="uid://um8253b1b0ft" path="res://assets/models/arms_with_akm/fps_arms_akm.glb" id="3_d07wa"]
+[ext_resource type="Script" path="res://scripts/weapon_manager.gd" id="3_q2gmp"]
+[ext_resource type="Resource" uid="uid://dnw53auo8juw5" path="res://scripts/resources/weapon resources/usp.tres" id="4_anph7"]
 [ext_resource type="PackedScene" uid="uid://dthb6jx8uct03" path="res://scripts/utilities/trauma_causer/trauma_causer.tscn" id="5_f2c6o"]
+[ext_resource type="Resource" uid="uid://ymvxpx66gxv7" path="res://scripts/resources/weapon resources/akm.tres" id="5_oc4r2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ggj08"]
 height = 1.8
 
-[sub_resource type="Curve" id="Curve_bqd7c"]
-min_value = -1.0
-_data = [Vector2(0, 0.05), 0.0, 0.0, 0, 0, Vector2(0.05, 0.231), -1.4256, -1.4256, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_4tl6y"]
-min_value = -1.0
-_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.05, 0.15), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_5dj6v"]
-min_value = -1.0
-_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.05, 0.143), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_l2fs4"]
+
+[sub_resource type="Animation" id="Animation_0k33h"]
+resource_name = "Akm_Activate"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("akm:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03, 0.57, 1),
+"transitions": PackedFloat32Array(1.1487, 0.392292, 1.8025),
+"update": 0,
+"values": [Vector3(1.5708, 5.23599, 0), Vector3(0.15708, 3.49066, 0), Vector3(0.00174533, 3.05433, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("akm:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.01, 1),
+"transitions": PackedFloat32Array(0.241484, 0.267943),
+"update": 0,
+"values": [Vector3(1, -1, 0.5), Vector3(0.03, -0.056, -0.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("akm:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.24),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_k3k3e"]
+resource_name = "Akm_Deactivate"
+length = 0.71
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("akm:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.29, 0.71),
+"transitions": PackedFloat32Array(2, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(0.00174533, 3.05433, 0), Vector3(0.00174533, 3.49066, 0), Vector3(1.5708, 5.23599, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("akm:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.28, 0.71),
+"transitions": PackedFloat32Array(1.18921, 0.241484),
+"update": 0,
+"values": [Vector3(0.03, -0.056, -0.15), Vector3(0.03, -1, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("akm:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_7ac0n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("usp:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.000580788, -0.0553035)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("akm:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.03, -0.056, -0.1)]
+}
+
+[sub_resource type="Animation" id="Animation_pbonc"]
+resource_name = "usp_Activate"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("usp:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.69),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.2, 0.001, -0.055), Vector3(0, 0.001, -0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("usp:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.31),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("usp:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.53, 1),
+"transitions": PackedFloat32Array(1.18921, 0.574349, 0.329877),
+"update": 0,
+"values": [Vector3(1.5708, -1.5708, 0), Vector3(0, -3.1765, 0), Vector3(0, -3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_euaaj"]
+resource_name = "usp_Deactivate"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("usp:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.001, -0.1), Vector3(0, -0.1, -0.055)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("usp:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1.14105, 0.482968),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0), Vector3(1.5708, -1.5708, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("usp:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5syv"]
+_data = {
+"Akm_Activate": SubResource("Animation_0k33h"),
+"Akm_Deactivate": SubResource("Animation_k3k3e"),
+"RESET": SubResource("Animation_7ac0n"),
+"usp_Activate": SubResource("Animation_pbonc"),
+"usp_Deactivate": SubResource("Animation_euaaj")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v4of0"]
 radius = 0.4
@@ -40,27 +226,37 @@ shape = SubResource("CapsuleShape3D_ggj08")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="shakeable_camera" parent="Head" instance=ExtResource("2_vt6on")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0147602, 0.0493994, 0.0659472)
 
 [node name="WeaponHolder" type="Node3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 0.984807, -0.173648, 0, 0.173648, 0.984807, -0.00291042, -0.0875831, -0.0423273)
+transform = Transform3D(1, 0, 0, 0, 0.984807, -0.173648, 0, 0.173648, 0.984807, -0.00291042, -0.153496, 0.10234)
+script = ExtResource("3_q2gmp")
+_weapon_resources = Array[Resource("res://scripts/resources/weapon_resource.gd")]([ExtResource("4_anph7"), ExtResource("5_oc4r2")])
+Start_Weapons = Array[String](["akm", "usp"])
 
-[node name="arms_with_gun_pistol2" parent="Head/WeaponHolder" instance=ExtResource("2_r1urs")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-script = ExtResource("3_uo8ud")
-recoil_rotation_x = SubResource("Curve_bqd7c")
-recoil_rotation_z = SubResource("Curve_4tl6y")
-recoil_position_z = SubResource("Curve_5dj6v")
-recoil_amplitude = Vector3(1, 0.05, 0.215)
-lerp_speed = 10.0
+[node name="akm" parent="Head/WeaponHolder" instance=ExtResource("3_d07wa")]
+transform = Transform3D(0.500002, -0.866024, 3.135e-06, 0, -3.61999e-06, -1, 0.866024, 0.500002, -1.81e-06, 0.03, -0.056, -0.1)
+visible = false
 
-[node name="trauma_causer" parent="Head/WeaponHolder/arms_with_gun_pistol2" instance=ExtResource("5_f2c6o")]
-transform = Transform3D(1, 5.32907e-15, -2.13163e-14, -5.32907e-15, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
+[node name="usp" parent="Head/WeaponHolder" instance=ExtResource("2_r1urs")]
+transform = Transform3D(-3.61999e-06, -1, 3.61999e-06, 0, -3.61999e-06, -1, 1, -3.61999e-06, 1.31043e-11, 0, 0.000580788, -0.0553035)
+visible = false
+
+[node name="trauma_causer" parent="Head/WeaponHolder" instance=ExtResource("5_f2c6o")]
+transform = Transform3D(-1, -5.32907e-15, -8.74228e-08, -7.10543e-15, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 trauma_amount = 0.8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/WeaponHolder/arms_with_gun_pistol2/trauma_causer"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/WeaponHolder/trauma_causer"]
 shape = SubResource("SphereShape3D_l2fs4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/WeaponHolder"]
+libraries = {
+"": SubResource("AnimationLibrary_p5syv")
+}
 
 [node name="TopCast" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("SphereShape3D_v4of0")
 target_position = Vector3(0, 0.5, 0)
+
+[connection signal="animation_finished" from="Head/WeaponHolder/AnimationPlayer" to="Head/WeaponHolder" method="_on_animation_player_animation_finished"]

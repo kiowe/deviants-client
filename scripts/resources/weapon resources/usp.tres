@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://dnw53auo8juw5"]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="1_m3ni6"]
+
+[resource]
+script = ExtResource("1_m3ni6")
+Weapon_Name = "usp"
+Activate_Anim = "usp_Activate"
+Deactivate_Anim = "usp_Deactivate"
+Current_Ammo = 12
+Reserve_Ammo = 36
+Max_Ammo = 0
+Auto_Fire = false

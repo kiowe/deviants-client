@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var crouch_speed = 2.5
 @export var accel = 16.0
 @export var jump_velocity = 6.0
-@export var crouch_height = 0.9
+@export var crouch_height = 1.26
 @export var crouch_transition = 14.0
 @export var sensitivity = 0.16
 @export var min_angle = -80
@@ -26,7 +26,6 @@ var look_rot : Vector2
 var stand_height : float
 var def_weapon_holder_pos : Vector3
 var mouse_input : Vector2
-
 
 func _ready():
 	stand_height = collision_shape.shape.height
@@ -105,8 +104,8 @@ func weapon_sway(delta):
 func weapon_bob(vel : int, delta):
 	if weapon_holder:
 		if vel > 0 and is_on_floor():
-			weapon_holder.position.y = lerp(weapon_holder.position.y, def_weapon_holder_pos.y + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
+			weapon_holder.position.y = lerp(weapon_holder.position.y, def_weapon_holder_pos.y * .1 + sin(Time.get_ticks_msec() * bob_freq) * bob_amount, 10 * delta)
 			weapon_holder.position.x = lerp(weapon_holder.position.x, def_weapon_holder_pos.x + sin(Time.get_ticks_msec() * bob_freq * 0.5) * bob_amount, 10 * delta)
 		else:
-			weapon_holder.position.y = lerp(weapon_holder.position.y, def_weapon_holder_pos.y, 10 * delta)
+			weapon_holder.position.y = lerp(weapon_holder.position.y, def_weapon_holder_pos.y * .1, 10 * delta)
 			weapon_holder.position.x = lerp(weapon_holder.position.x, def_weapon_holder_pos.x, 10 * delta)
